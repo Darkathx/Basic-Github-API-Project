@@ -4,7 +4,7 @@ class UI {
         this.repoDiv = document.getElementById("repos");
         this.lastUsers = document.getElementById("last-users");
         this.inputField = document.getElementById("githubname");
-        this.cardBody = document.querySelector("card-body");
+        this.cardBody = document.querySelector(".card-body");
     }
 
     clearInputField() {
@@ -90,4 +90,27 @@ class UI {
             `;
         });
     }
-}
+    addSearchedUserToUI(username) {
+        let history = Storage.getSearchedUsers();
+        if(history.indexOf(username) === -1) {
+            const li = document.createElement("li");
+            li.className = "list-group-item";
+            li.textContent = username;
+            this.lastUsers.appendChild(li);
+        }
+    }
+
+    addAllUsersToUI() {
+        let history = Storage.getSearchedUsers();
+        history.forEach(user => {
+            const li = document.createElement("li");
+            li.className = "list-group-item";
+            li.textContent = user;
+            this.lastUsers.appendChild(li);
+        });
+    }
+
+    removeAllUsersFromUI() {
+        this.lastUsers.textContent = "";
+    }
+ }

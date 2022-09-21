@@ -10,7 +10,7 @@ eventListeners();
 function eventListeners() {
     githubForm.addEventListener("submit", receiveDatas);
     removeAllUsers.addEventListener("click", removeHistory);
-    document.addEventListener("DOMContentLoaded", restoreHistory);
+    document.addEventListener("DOMContentLoaded", ui.addAllUsersToUI());
 }
 
 function receiveDatas(e) {
@@ -22,6 +22,8 @@ function receiveDatas(e) {
             ui.showError("User Not Found!");
         }
         else {
+            ui.addSearchedUserToUI(username);
+            Storage.addSearchedUser(username);
             ui.showUserInfo(response.user);
             ui.showRepoInfo(response.repo);
         }
@@ -32,9 +34,16 @@ function receiveDatas(e) {
 }
 
 function removeHistory() {
-
+    ui.removeAllUsersFromUI();
+    Storage.clearAllHistory();
 }
 
-function restoreHistory() {
-
-}
+// function restoreHistory() {
+//     // let users = Storage.getSearchedUsers();
+//     // let result;
+//     // users.forEach(user => {
+//     //     result += `<li class="list-group-item">${user}</li>`;
+//     // })
+//     // ui.lastUsers.innerHTML += result;
+//     ui.addAllUsersToUI();
+// }
