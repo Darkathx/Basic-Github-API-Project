@@ -34,9 +34,10 @@ function receiveDatas(e) {
 }
 
 function removeHistory() {
+    if(confirm("Are you sure ?")) {
     ui.removeAllUsersFromUI();
     Storage.clearAllHistory();
-}
+}}
 
 // function restoreHistory() {
 //     // let users = Storage.getSearchedUsers();
